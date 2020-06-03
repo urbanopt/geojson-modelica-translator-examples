@@ -3,12 +3,9 @@
 # Not sure why requests isn't installed with GMT.
 requests==2.22.0
 
-# Not sure why antlr isn't installed with modelica-builder
-antlr4-python3-runtime==4.8
-
 # GMT
-#-e git+https://github.com/urbanopt/geojson-modelica-translator.git@develop#egg=geojson_modelica_translator
--e file:../geojson-modelica-translator#egg=geojson_modelica_translator
+-e git+https://github.com/urbanopt/geojson-modelica-translator.git@100-package-update#egg=geojson_modelica_translator
+#-e file:../geojson-modelica-translator#egg=geojson_modelica_translator
 
 # Test and documentation
 nose==1.3.7
