@@ -43,7 +43,7 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 
 class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
     def setUp(self):
-        self.data_dir = os.path.join(os.path.dirname(__file__), "..", "examples", "uo_example_project")
+        self.data_dir = os.path.join(os.path.dirname(__file__), "..", "examples", "uo_teaser_project")
         self.output_dir = os.path.join(os.path.dirname(__file__), "..", "output")
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
@@ -100,3 +100,20 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
                 path = os.path.join(gj.scaffold.loads_path.files_dir, "Resources", "Data",
                                     b.dirname, f"{resource_name}.txt")
                 self.assertTrue(os.path.exists(path), f"Path not found: {path}")
+
+        # TODO: add ModelicaRunner to this test.
+#         # make sure the model can run using the ModelicaRunner class
+#         mr = ModelicaRunner()
+#
+#         file_to_run = os.path.abspath(
+#             os.path.join(self.gj.scaffold.loads_path.files_dir, 'B5a6b99ec37f4de7f94020090', 'coupling.mo'),
+#         )
+#         run_path = Path(os.path.abspath(self.gj.scaffold.project_path)).parent
+#         exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=self.gj.scaffold.project_name)
+#         self.assertEqual(0, exitcode)
+#
+#         results_path = os.path.join(run_path, f"{self.gj.scaffold.project_name}_results")
+#         self.assertTrue(os.path.join(results_path, 'stdout.log'))
+#         self.assertTrue(
+#             os.path.join(results_path, 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_CouplingETS_SpawnBuilding.fmu')
+#         )

@@ -39,7 +39,7 @@ from geojson_modelica_translator.geojson_modelica_translator import (
 from geojson_modelica_translator.system_parameters.system_parameters import (
     SystemParameters
 )
-
+from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
 class SpawnTwoBuildingTest(unittest.TestCase):
     def setUp(self):
@@ -68,62 +68,20 @@ class SpawnTwoBuildingTest(unittest.TestCase):
         gj.to_modelica(project_name, self.output_dir)
 
         # setup what we are going to check
-        model_names = [
-            "Floor",
-            "ICT",
-            "Meeting",
-            "Office",
-            "package",
-            "Restroom",
-            "Storage",
-        ]
-        building_paths = [
-            os.path.join(gj.scaffold.loads_path.files_dir, b.dirname) for b in gj.buildings
-        ]
-        path_checks = [f"{os.path.sep.join(r)}.mo" for r in itertools.product(building_paths, model_names)]
+        # TODO: add ModelicaRunner to this test.
+#         # make sure the model can run using the ModelicaRunner class
+#         mr = ModelicaRunner()
+#
+#         file_to_run = os.path.abspath(
+#             os.path.join(self.gj.scaffold.loads_path.files_dir, 'B5a6b99ec37f4de7f94020090', 'coupling.mo'),
+#         )
+#         run_path = Path(os.path.abspath(self.gj.scaffold.project_path)).parent
+#         exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=self.gj.scaffold.project_name)
+#         self.assertEqual(0, exitcode)
+#
+#         results_path = os.path.join(run_path, f"{self.gj.scaffold.project_name}_results")
+#         self.assertTrue(os.path.join(results_path, 'stdout.log'))
+#         self.assertTrue(
+#             os.path.join(results_path, 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_CouplingETS_SpawnBuilding.fmu')
+#         )
 
-        for p in path_checks:
-            self.assertTrue(os.path.exists(p), f"Path not found: {p}")
-
-        # go through the generated buildings and ensure that the resources are created
-        resource_names = [
-            "InternalGains_Floor",
-            "InternalGains_ICT",
-            "InternalGains_Meeting",
-            "InternalGains_Office",
-            "InternalGains_Restroom",
-            "InternalGains_Storage",
-        ]
-
-        for b in gj.buildings:
-            for resource_name in resource_names:
-                # TEASER 0.7.2 used .txt for schedule files
-                path = os.path.join(gj.scaffold.loads_path.files_dir, "Resources", "Data",
-                                    b.dirname, f"{resource_name}.txt")
-                self.assertTrue(os.path.exists(path), f"Path not found: {path}")
-
-
-# import os
-# from geojson_modelica_translator.geojson_modelica_translator import GeoJsonModelicaTranslator
-# from geojson_modelica_translator.system_parameters.system_parameters import SystemParameters
-# from geojson_modelica_translator.model_connectors.spawn import SpawnConnector
-#
-#
-# prj_dir = 'spawn_two_building'
-#
-# # load in the example geojson with a single offie building
-# filename = os.path.abspath('spawn_geojson_ex2.json')
-# gj = GeoJsonModelicaTranslator.from_geojson(filename)
-# gj.scaffold_directory(prj_dir)  # use the GeoJson translator to scaffold out the directory
-#
-# # load system parameter data
-# filename = os.path.abspath('spawn_system_params_ex2.json')
-# sys_params = SystemParameters(filename)
-#
-# # now test the spawn connector (independent of the larger geojson translator
-# self.spawn = SpawnConnector(sys_params)
-#
-# for b in gj.buildings:
-#     self.spawn.add_building(b)
-#
-# self.spawn.to_modelica('spawn_two_building', prj_dir)
