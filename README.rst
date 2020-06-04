@@ -27,12 +27,18 @@ To run the tests in this repo execute the following in a terminal.
 
 Matrix of Examples to Create
 ----------------------------
-| ID        | Number of Buildings | Building Load | ETS Model | Network Model | District Plant                     | Status  |
-|-----------|---------------------|---------------|-----------|---------------|------------------------------------|---------|
-| 4GDHC - 1 | 13                  | TEASER        | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | Complete | 
-| 4GDHC - 2 | 13                  | Spawn         | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | In-Progress |
-| 4GDHC - 3 | 13                  | Timeseries    | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -
-| 4GDHC - 4 | 13                  | Mix           | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -
+
++------------+------------+-----------+-----------+-----------+-----------+
+| ID   | Number of Buildings   | ETS Model  | Network Model | District Plant | Status |
++============+============+===========+===========+===========+===========+
+| 4GDHC - 1 | 13   | TEASER     | Indirect | 4-Pipe | Chiller, Cooling Tower, and Boiler | Complete |
++------------+------------+-----------+-----------+-----------+-----------+
+| 4GDHC - 2 | 13   | Spawn      | Indirect | 4-Pipe | Chiller, Cooling Tower, and Boiler | In-progress |
++------------+------------+-----------+-----------+-----------+-----------+
+| 4GDHC - 3 | 13   | Timeseries | Indirect | 4-Pipe | Chiller, Cooling Tower, and Boiler | - |
++------------+------------+-----------+-----------+-----------+-----------+
+| 4GDHC - 4 | 13   | Mix        | Indirect | 4-Pipe | Chiller, Cooling Tower, and Boiler | - |
++------------+------------+-----------+-----------+-----------+-----------+
 
 Todos
 -----
