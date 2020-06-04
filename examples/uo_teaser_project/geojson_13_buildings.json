@@ -13,7 +13,7 @@
         "cec_climate_zone": null,
         "climate_zone": "6A",
         "default_template": "90.1-2013",
-        "end_date": "2017-13-31T07:00:00.000Z",
+        "end_date": "2017-12-31T07:00:00.000Z",
         "id": "53340c2c-ab20-40db-aba1-11ac607c52a7",
         "import_surrounding_buildings_as_shading": null,
         "name": "Site Origin",
@@ -66,14 +66,10 @@
         "type": "Polygon"
       },
       "properties": {
-        "id": "1",
-        "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
-        "building_type": "Office",
+        "building_type": "Mixed use",
         "floor_area": 752184,
-        "floor_height": 12,
-        "year_built": 1980,
         "footprint_area": 188046,
+        "id": "1",
         "mixed_type_1": "Office",
         "mixed_type_1_percentage": 50,
         "mixed_type_2": "Food service",
@@ -83,6 +79,7 @@
         "mixed_type_4": "Lodging",
         "mixed_type_4_percentage": 0,
         "name": "Mixed_use 1",
+        "number_of_stories": 4,
         "type": "Building"
       },
       "type": "Feature"
@@ -122,9 +119,6 @@
         "id": "2",
         "name": "Restaurant 1",
         "number_of_stories": 1,
-        "number_of_stories_above_ground": 1,
-        "year_built": 1980,
-        "floor_height": 12,
         "type": "Building"
       },
       "type": "Feature"
@@ -137,10 +131,7 @@
         "type": "Building",
         "footprint_area": 41877,
         "floor_area": 125631,
-        "floor_height": 12,
-        "year_built": 1980,
         "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
         "building_type": "Food service"
       },
       "geometry": {
@@ -179,10 +170,7 @@
         "type": "Building",
         "footprint_area": 10541,
         "floor_area": 31623,
-        "floor_height": 12,
         "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
-        "year_built": 1980,
         "building_type": "Food service"
       },
       "geometry": {
@@ -221,10 +209,7 @@
         "type": "Building",
         "footprint_area": 8804,
         "floor_area": 8804,
-        "floor_height": 12,
         "number_of_stories": 1,
-        "number_of_stories_above_ground": 1,
-        "year_built": 1980,
         "building_type": "Food service"
       },
       "geometry": {
@@ -263,10 +248,7 @@
         "type": "Building",
         "footprint_area": 10689,
         "floor_area": 10689,
-        "floor_height": 12,
         "number_of_stories": 1,
-        "number_of_stories_above_ground": 1,
-        "year_built": 1980,
         "building_type": "Food service"
       },
       "geometry": {
@@ -330,10 +312,6 @@
         "id": "7",
         "detailed_model_filename": "7.osm",
         "number_of_stories": 6,
-        "number_of_stories_above_ground": 6,
-        "floor_area": 10689,
-        "floor_height": 12,
-        "year_built": 1980,
         "name": "Office 1",
         "type": "Building"
       },
@@ -381,10 +359,6 @@
         "name": "Hospital 1",
         "detailed_model_filename": "8.osm",
         "number_of_stories": 10,
-        "number_of_stories_above_ground": 10,
-        "year_built": 1980,
-        "floor_area": 10689,
-        "floor_height": 12,
         "type": "Building"
       },
       "type": "Feature"
@@ -439,10 +413,6 @@
         "detailed_model_filename": "9.osm",
         "name": "Hospital 2",
         "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
-        "year_built": 1980,
-        "floor_area": 10689,
-        "floor_height": 12,
         "type": "Building"
       },
       "type": "Feature"
@@ -484,9 +454,8 @@
         "type": "Polygon"
       },
       "properties": {
-        "building_type": "Office",
+        "building_type": "Mixed use",
         "floor_area": 1278384,
-        "floor_height": 12,
         "footprint_area": 159798,
         "id": "10",
         "mixed_type_1": "Strip shopping mall",
@@ -499,8 +468,6 @@
         "mixed_type_4_percentage": 35,
         "name": "Mixed use 2",
         "number_of_stories": 8,
-        "number_of_stories_above_ground": 8,
-        "year_built": 1980,
         "type": "Building"
       },
       "type": "Feature"
@@ -513,10 +480,7 @@
         "type": "Building",
         "footprint_area": 10837,
         "floor_area": 32511,
-        "floor_height": 12,
         "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
-        "year_built": 1980,
         "building_type": "Food service"
       },
       "geometry": {
@@ -578,13 +542,10 @@
       "properties": {
         "building_type": "Strip shopping mall",
         "floor_area": 374409,
-        "floor_height": 12,
         "footprint_area": 124803,
         "id": "12",
         "name": "Mall 1",
         "number_of_stories": 3,
-        "number_of_stories_above_ground": 3,
-        "year_built": 1980,
         "type": "Building"
       },
       "type": "Feature"
@@ -620,13 +581,10 @@
       "properties": {
         "building_type": "Lodging",
         "floor_area": 316160,
-        "floor_height": 12,
         "footprint_area": 31616,
         "id": "13",
         "name": "Hotel 1",
         "number_of_stories": 10,
-        "number_of_stories_above_ground": 10,
-        "year_built": 1980,
         "type": "Building"
       },
       "type": "Feature"
