@@ -52,70 +52,10 @@
     {
       "type": "Feature",
       "properties": {
-        "id": "1",
-        "name": "Mixed_use 1",
-        "type": "Building",
-        "building_type": "Mixed use",
-        "floor_area": 752184,
-        "footprint_area": 188046,
-        "number_of_stories": 4,
-        "mixed_type_1": "Office",
-        "mixed_type_1_percentage": 50,
-        "mixed_type_2": "Food service",
-        "mixed_type_2_percentage": 50,
-        "mixed_type_3": "Strip shopping mall",
-        "mixed_type_3_percentage": 0,
-        "mixed_type_4": "Lodging",
-        "mixed_type_4_percentage": 0
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -78.84650338745196,
-              42.81331301863236
-            ],
-            [
-              -78.84652443964629,
-              42.81463974371101
-            ],
-            [
-              -78.84680142363833,
-              42.815293654042534
-            ],
-            [
-              -78.84744455124724,
-              42.81514110006128
-            ],
-            [
-              -78.84728610028628,
-              42.81478165791734
-            ],
-            [
-              -78.84786797764677,
-              42.814643631760134
-            ],
-            [
-              -78.84721106637106,
-              42.813153418927016
-            ],
-            [
-              -78.84650338745196,
-              42.81331301863236
-            ]
-          ]
-        ]
-      }
-    },
-
-    {
-      "type": "Feature",
-      "properties": {
         "id": "2",
         "name": "Restaurant 1",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 22313,
         "footprint_area": 22313,
         "number_of_stories": 1
@@ -451,63 +391,7 @@
         ]
       }
     },
-    
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "10",
-        "name": "Mixed use 2",
-        "type": "Building",
-        "building_type": "Mixed use",
-        "floor_area": 1278384,
-        "footprint_area": 159798,
-        "number_of_stories": 8,
-        "mixed_type_1": "Strip shopping mall",
-        "mixed_type_1_percentage": 25,
-        "mixed_type_2": "Food service",
-        "mixed_type_2_percentage": 25,
-        "mixed_type_3": "Office",
-        "mixed_type_3_percentage": 15,
-        "mixed_type_4": "Lodging",
-        "mixed_type_4_percentage": 35
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -78.85115264550463,
-              42.81786093060211
-            ],
-            [
-              -78.85163483958878,
-              42.81774467026972
-            ],
-            [
-              -78.85246596719499,
-              42.819583261120755
-            ],
-            [
-              -78.85082390085432,
-              42.819979162017745
-            ],
-            [
-              -78.85060552295334,
-              42.81947573727234
-            ],
-            [
-              -78.85174564783776,
-              42.81920483484765
-            ],
-            [
-              -78.85115264550463,
-              42.81786093060211
-            ]
-          ]
-        ]
-      }
-    },
-    
+        
     {
       "type": "Feature",
       "properties": {
