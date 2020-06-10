@@ -25,6 +25,13 @@ To run the tests in this repo execute the following in a terminal.
 
     py.test
 
+Note to update git pip packages then run:
+
+.. code-block:: bash
+
+    pip install -U --upgrade-strategy eager -r requirements.txt
+
+
 Matrix of Examples to Create
 ----------------------------
 
@@ -45,4 +52,4 @@ Todos
 -----
 
 * handle weather!
-* How to update git dependencies using pip
+
