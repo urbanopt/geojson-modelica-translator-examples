@@ -28,10 +28,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ****************************************************************************************************
 """
 
-import itertools
-import os
 import shutil
-import unittest
+from unittest import TestCase
+from pathlib import Path
 
 from geojson_modelica_translator.geojson_modelica_translator import (
     GeoJsonModelicaTranslator
@@ -41,28 +40,28 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 )
 from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
-class SpawnTwoBuildingTest(unittest.TestCase):
+class SpawnTwoBuildingTest(TestCase):
     def setUp(self):
-        self.data_dir = os.path.join(os.path.dirname(__file__), "..", "examples", "spawn_two_buildings")
-        self.output_dir = os.path.join(os.path.dirname(__file__), "..", "output")
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
+        self.data_dir = Path(__file__).parent.parent / "examples" / "spawn_two_buildings"
+        self.output_dir = Path(__file__).parent.parent / "output"
+        if not self.output_dir.is_dir():
+            self.output_dir.mkdir(parents=True, exist_ok=False)
 
     def test_from_geojson(self):
-        filename = os.path.join(self.data_dir, "spawn_geojson.json")
+        filename = self.data_dir / "spawn_geojson.json"
         gj = GeoJsonModelicaTranslator.from_geojson(filename)
 
         self.assertEqual(len(gj.buildings), 2)
 
     def test_to_modelica_defaults(self):
         project_name = "spawn_geojson"
-        results_path = os.path.join(self.output_dir, project_name)
-        if os.path.exists(results_path):
+        results_path = self.output_dir / project_name
+        if results_path.is_dir():
             shutil.rmtree(results_path)
 
-        feature_json_file = os.path.join(self.data_dir, f"{project_name}.json")
+        feature_json_file = self.data_dir / f"{project_name}.json"
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
-        sys_params_json_file = os.path.join(self.data_dir, 'spawn_system_params.json')
+        sys_params_json_file = self.data_dir / 'spawn_system_params.json'
         sys_params = SystemParameters(sys_params_json_file)
         gj.set_system_parameters(sys_params)
         gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
