@@ -44,9 +44,9 @@ class SpawnTwoBuildingTest(TestCase):
     def setUp(self):
         self.data_dir = Path(__file__).parent.parent / "examples" / "spawn_two_buildings"
         self.output_dir = Path(__file__).parent.parent / "output"
-        if not self.output_dir.is_dir():
+        if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=False)
-
+        
     def test_from_geojson(self):
         filename = self.data_dir / "spawn_geojson.json"
         gj = GeoJsonModelicaTranslator.from_geojson(filename)
@@ -56,7 +56,7 @@ class SpawnTwoBuildingTest(TestCase):
     def test_to_modelica_defaults(self):
         project_name = "spawn_geojson"
         results_path = self.output_dir / project_name
-        if results_path.is_dir():
+        if results_path.exists():
             shutil.rmtree(results_path)
 
         feature_json_file = self.data_dir / f"{project_name}.json"
