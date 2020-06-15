@@ -60,12 +60,12 @@ class SpawnTwoBuildingTest(unittest.TestCase):
         if os.path.exists(results_path):
             shutil.rmtree(results_path)
 
-        filename = os.path.join(self.data_dir, f"{project_name}.json")
-        gj = GeoJsonModelicaTranslator.from_geojson(filename)
-        filename = os.path.join(self.data_dir, 'spawn_system_params.json')
-        sys_params = SystemParameters(filename)
+        feature_json_file = os.path.join(self.data_dir, f"{project_name}.json")
+        gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
+        sys_params_json_file = os.path.join(self.data_dir, 'spawn_system_params.json')
+        sys_params = SystemParameters(sys_params_json_file)
         gj.set_system_parameters(sys_params)
-        gj.to_modelica(project_name, self.output_dir)
+        gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
 
         # setup what we are going to check
         # TODO: add ModelicaRunner to this test.
