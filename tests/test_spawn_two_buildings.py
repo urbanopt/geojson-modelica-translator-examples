@@ -46,7 +46,7 @@ class SpawnTwoBuildingTest(TestCase):
         self.output_dir = Path(__file__).parent.parent / "output"
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=False)
-        
+
     def test_from_geojson(self):
         filename = self.data_dir / "spawn_geojson.json"
         gj = GeoJsonModelicaTranslator.from_geojson(filename)
@@ -66,21 +66,32 @@ class SpawnTwoBuildingTest(TestCase):
         gj.set_system_parameters(sys_params)
         gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
 
-        # setup what we are going to check
-        # TODO: add ModelicaRunner to this test.
-#         # make sure the model can run using the ModelicaRunner class
-#         mr = ModelicaRunner()
-#
-#         file_to_run = os.path.abspath(
-#             os.path.join(self.gj.scaffold.loads_path.files_dir, 'B5a6b99ec37f4de7f94020090', 'coupling.mo'),
-#         )
-#         run_path = Path(os.path.abspath(self.gj.scaffold.project_path)).parent
-#         exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=self.gj.scaffold.project_name)
-#         self.assertEqual(0, exitcode)
-#
-#         results_path = os.path.join(run_path, f"{self.gj.scaffold.project_name}_results")
-#         self.assertTrue(os.path.join(results_path, 'stdout.log'))
-#         self.assertTrue(
-#             os.path.join(results_path, 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_CouplingETS_SpawnBuilding.fmu')
-#         )
+        # TODO: setup what we are going to check
+    def test_spawn_modelica_runner(self):
+        project_name = "modelica_geojson"
+        results_path = self.output_dir / project_name
+        if results_path.exists():
+            shutil.rmtree(results_path)
+
+        filename = self.data_dir / "spawn_geojson.json"
+        gj = GeoJsonModelicaTranslator.from_geojson(filename)
+
+        sys_params_json_file = self.data_dir / 'spawn_system_params.json'
+        sys_params = SystemParameters(sys_params_json_file)
+        gj.set_system_parameters(sys_params)
+
+        gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
+
+        mr = ModelicaRunner()
+        
+        file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
+        run_path = Path(gj.scaffold.project_path).parent
+        exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=gj.scaffold.project_name)
+        self.assertEqual(0, exitcode)
+
+        results_path = Path(run_path / f"{gj.scaffold.project_name}_results")
+        self.assertTrue(Path(results_path) / 'stdout.log')
+        self.assertTrue(
+            Path(results_path) / 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_CouplingETS_SpawnBuilding.fmu'
+        )
 
