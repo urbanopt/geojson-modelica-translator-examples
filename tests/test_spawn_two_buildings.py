@@ -71,6 +71,7 @@ class SpawnTwoBuildingTest(TestCase):
         # TODO: setup what we are going to check
     def test_spawn_modelica_runner(self):
         project_name = "modelica_geojson"
+        # If a previous run of this test exists, delete it and start over
         results_path = self.output_dir / project_name
         if results_path.exists():
             shutil.rmtree(results_path)
