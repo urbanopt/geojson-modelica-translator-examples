@@ -65,6 +65,8 @@ class SpawnTwoBuildingTest(TestCase):
         sys_params = SystemParameters(sys_params_json_file)
         gj.set_system_parameters(sys_params)
         gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
+        self.assertTrue(results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" /
+        "RefBldgSmallOfficeNew2004_Chicago.idf")
 
         # TODO: setup what we are going to check
     def test_spawn_modelica_runner(self):
@@ -86,6 +88,7 @@ class SpawnTwoBuildingTest(TestCase):
         
         file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
         run_path = Path(gj.scaffold.project_path).parent
+        
         exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=gj.scaffold.project_name)
         self.assertEqual(0, exitcode)
 
