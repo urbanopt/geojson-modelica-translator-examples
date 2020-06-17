@@ -64,7 +64,7 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
         gj = GeoJsonModelicaTranslator.from_geojson(filename)
         sys_params = SystemParameters()
         gj.set_system_parameters(sys_params)
-        gj.to_modelica(project_name, self.output_dir)
+        gj.to_modelica(project_name, self.output_dir, model_connector_str="TeaserConnector")
 
         # setup what we are going to check
         model_names = [
