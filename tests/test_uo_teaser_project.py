@@ -49,13 +49,13 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
             os.makedirs(self.output_dir)
 
     def test_from_geojson(self):
-        filename = os.path.join(self.data_dir, "geojson_11_buildings.json")
+        filename = os.path.join(self.data_dir, "geojson_8_buildings.json")
         gj = GeoJsonModelicaTranslator.from_geojson(filename)
 
-        self.assertEqual(len(gj.buildings), 11)
+        self.assertEqual(len(gj.buildings), 8)
 
     def test_to_modelica_defaults(self):
-        project_name = "geojson_11_buildings"
+        project_name = "geojson_8_buildings"
         results_path = os.path.join(self.output_dir, project_name)
         if os.path.exists(results_path):
             shutil.rmtree(results_path)
