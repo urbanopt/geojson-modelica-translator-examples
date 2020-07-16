@@ -38,13 +38,17 @@ Matrix of Examples to Create
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | ID        | Number of Buildings | Building Loads | ETS Model | Network Model | District Plant                     | Status      |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 1 | 13                  | TEASER         | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | Complete    |
+| 4GDHC - 1 | 8                   | TEASER         | N/A       | N/A           | Infinite Heating and Cooling       | Complete    |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 2 | 13                  | Spawn          | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | In-progress |
+| 4GDHC - 2 | 2                   | Spawn          | N/A       | N/A           | Infinite Heating and Cooling       | Complete    |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 3 | 13                  | Timeseries     | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
+| 4GDHC - 3 | 8                   | TEASER         | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 4 | 13                  | Mix            | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
+| 4GDHC - 4 | 8                   | Spawn          | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
++-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
+| 4GDHC - 5 | 8                   | Timeseries     | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
++-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
+| 4GDHC - 6 | 8                   | Mix            | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 
 

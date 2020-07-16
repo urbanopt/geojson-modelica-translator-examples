@@ -1,11 +1,11 @@
-# Run `pip install -r requirements.txt`
+# Run `pip install -r requirements.txt` or `pip install -U --upgrade-strategy eager -r requirements.txt`
 
 # Not sure why requests isn't installed with GMT.
 requests==2.22.0
 
 # GMT
-#-e git+https://github.com/urbanopt/geojson-modelica-translator.git@develop#egg=geojson_modelica_translator
--e file:../geojson-modelica-translator#egg=geojson_modelica_translator
+-e git+https://github.com/urbanopt/geojson-modelica-translator.git@develop#egg=geojson_modelica_translator
+#-e file:../geojson-modelica-translator#egg=geojson_modelica_translator
 
 # Test and documentation
 nose==1.3.7
