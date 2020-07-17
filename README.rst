@@ -44,9 +44,9 @@ Matrix of Examples to Create
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | 4GDHC - 3 | 8                   | TEASER         | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 4 | 8                   | Spawn          | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
+| 4GDHC - 4 | 2                   | Spawn          | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 5 | 8                   | Timeseries     | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
+| 4GDHC - 5 | TBD                 | Time Series    | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | 4GDHC - 6 | 8                   | Mix            | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | -           |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
