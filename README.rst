@@ -20,7 +20,7 @@ To run the tests in this repo execute the following in a terminal.
 
 .. code-block:: bash
 
-    pip install requests==2.22.0
+    pip install requests==2.24.0
     pip install -r requirements.txt
 
     py.test
@@ -56,4 +56,3 @@ Todos
 -----
 
 * handle weather!
-

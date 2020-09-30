@@ -45,28 +45,25 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 
 class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
     def setUp(self):
-        self.data_dir = os.path.join(os.path.dirname(__file__), "..", "examples", "uo_teaser_project")
-        self.output_dir = os.path.join(os.path.dirname(__file__), "..", "output")
+        self.data_dir = Path(__file__).parent.parent / "examples" / "uo_teaser_project"
+        self.output_dir = Path(__file__).parent.parent / "output"
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-    def test_from_geojson(self):
-        filename = os.path.join(self.data_dir, "geojson_8_buildings.json")
-        gj = GeoJsonModelicaTranslator.from_geojson(filename)
-
-        self.assertEqual(len(gj.buildings), 8)
-
     def test_to_modelica_defaults(self):
         project_name = "geojson_8_buildings"
-        results_path = os.path.join(self.output_dir, project_name)
-        if os.path.exists(results_path):
+        results_path = Path(self.output_dir) / project_name
+        if results_path.exists():
             shutil.rmtree(results_path)
 
-        filename = os.path.join(self.data_dir, f"{project_name}.json")
-        gj = GeoJsonModelicaTranslator.from_geojson(filename)
-        sys_params = SystemParameters()
-        gj.set_system_parameters(sys_params)
-        gj.to_modelica(project_name, self.output_dir, model_connector_str="TeaserConnector")
+        feature_json_file = self.data_dir / f"{project_name}.json"
+        gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
+        sys_params_json_file = self.data_dir / 'geojson_8_system_params.json'
+        gj.set_system_parameters(SystemParameters(sys_params_json_file))
+        gj.process_loads()
+        self.assertEqual(len(gj.loads), 8)
+
+        gj.to_modelica(project_name, self.output_dir)
 
         # setup what we are going to check
         model_names = [
@@ -78,9 +75,12 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
             "Restroom",
             "Storage",
         ]
+
         building_paths = [
-            os.path.join(gj.scaffold.loads_path.files_dir, b.dirname) for b in gj.buildings
+            os.path.join(gj.scaffold.loads_path.files_dir, b.dirname) for b in gj.json_loads
         ]
+        print(building_paths)
+
         path_checks = [f"{os.path.sep.join(r)}.mo" for r in itertools.product(building_paths, model_names)]
 
         for p in path_checks:
@@ -96,13 +96,14 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
             "InternalGains_Storage",
         ]
 
-        for b in gj.buildings:
+        for b in gj.json_loads:
             for resource_name in resource_names:
                 # TEASER 0.7.2 used .txt for schedule files
                 path = os.path.join(gj.scaffold.loads_path.files_dir, "Resources", "Data",
                                     b.dirname, f"{resource_name}.txt")
                 self.assertTrue(os.path.exists(path), f"Path not found: {path}")
 
+        # run a single file to make sure it simulates
         mr = ModelicaRunner()
 
         file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B2' / 'coupling.mo'
