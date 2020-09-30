@@ -29,16 +29,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import shutil
-from unittest import TestCase
 from pathlib import Path
+from unittest import TestCase
 
 from geojson_modelica_translator.geojson_modelica_translator import (
     GeoJsonModelicaTranslator
 )
+from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 from geojson_modelica_translator.system_parameters.system_parameters import (
     SystemParameters
 )
-from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
+
 
 class SpawnTwoBuildingTest(TestCase):
     def setUp(self):
@@ -46,12 +47,6 @@ class SpawnTwoBuildingTest(TestCase):
         self.output_dir = Path(__file__).parent.parent / "output"
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=False)
-
-    def test_from_geojson(self):
-        filename = self.data_dir / "spawn_geojson.json"
-        gj = GeoJsonModelicaTranslator.from_geojson(filename)
-
-        self.assertEqual(len(gj.buildings), 2)
 
     def test_to_modelica_defaults(self):
         project_name = "spawn_geojson"
@@ -63,9 +58,11 @@ class SpawnTwoBuildingTest(TestCase):
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
         sys_params_json_file = self.data_dir / 'spawn_system_params.json'
         gj.set_system_parameters(SystemParameters(sys_params_json_file))
-        gj.to_modelica(project_name, self.output_dir, model_connector_str="SpawnConnector")
-        self.assertTrue(results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" /
-        "RefBldgSmallOfficeNew2004_Chicago.idf")
+        gj.process_loads()
+        self.assertEqual(len(gj.loads), 2)
+
+        gj.to_modelica(project_name, self.output_dir)
+        self.assertTrue(results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_Chicago.idf")  # noqa
 
         mr = ModelicaRunner()
 
@@ -80,4 +77,3 @@ class SpawnTwoBuildingTest(TestCase):
         self.assertTrue(
             Path(results_path) / 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_SpawnCouplingETS.fmu'
         )
-
