@@ -4,14 +4,12 @@ GeoJSON to Modelica Translator Examples
 .. image:: https://travis-ci.org/urbanopt/geojson-modelica-translator-examples.svg?branch=develop
     :target: https://travis-ci.org/urbanopt/geojson-modelica-translator-examples
 
-.. image:: https://coveralls.io/repos/github/urbanopt/geojson-modelica-translator-examples/badge.svg?branch=develop
-    :target: https://coveralls.io/github/urbanopt/geojson-modelica-translator-examples?branch=develop
-
-
 Description
 -----------
 
-To be completed
+This project provides examples on how to use the GeoJSON to Modelica Translator. The examples that are being
+developed are shown in the matrix below with the appropriate definition of the loads, ETS model, network model,
+and the district plant.
 
 Getting Started
 ---------------
