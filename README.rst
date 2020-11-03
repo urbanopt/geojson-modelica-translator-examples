@@ -26,7 +26,7 @@ To install the dependencies run the following after checking out repository:
     pip install -r requirements.txt
 
 
-To run the tests in this project, then run the following:
+To run the tests in this project, run the following:
 
 .. code-block:: bash
 
