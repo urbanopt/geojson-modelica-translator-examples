@@ -45,25 +45,27 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 
 class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
     def setUp(self):
+        self.project_name = "geojson_8_buildings"
         self.data_dir = Path(__file__).parent.parent / "examples" / "uo_teaser_project"
         self.output_dir = Path(__file__).parent.parent / "output"
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-    def test_to_modelica_defaults(self):
-        project_name = "geojson_8_buildings"
-        results_path = Path(self.output_dir) / project_name
-        if results_path.exists():
-            shutil.rmtree(results_path)
+        self.results_path = self.output_dir / self.project_name
+        if self.results_path.exists():
+            shutil.rmtree(self.results_path)
 
-        feature_json_file = self.data_dir / f"{project_name}.json"
+    def test_to_modelica_defaults(self):
+        feature_json_file = self.data_dir / f"{self.project_name}.json"
+
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
         sys_params_json_file = self.data_dir / 'geojson_8_system_params.json'
         gj.set_system_parameters(SystemParameters(sys_params_json_file))
         gj.process_loads()
+
         self.assertEqual(len(gj.loads), 8)
 
-        gj.to_modelica(project_name, self.output_dir)
+        gj.to_modelica(self.project_name, self.output_dir)
 
         # setup what we are going to check
         model_names = [

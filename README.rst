@@ -14,16 +14,27 @@ and the district plant.
 Getting Started
 ---------------
 
-To run the tests in this repo execute the following in a terminal.
+This project depends on the `GeoJSON to Modelica Translator`_ (GMT). The GMT will be installed when calling
+:code:`pip install requirements.txt`; however, the `Modelica Buildings Library`_ (MBL) needs to be installed to build and
+run the Modelica-based projects. Follow the instructions in the `GMT readme`_ on installing and configuring the MBL.
+
+To install the dependencies run the following after checking out repository:
 
 .. code-block:: bash
 
     pip install requests==2.24.0
     pip install -r requirements.txt
 
+
+To run the tests in this project, then run the following:
+
+.. code-block:: bash
+
     py.test
 
-Note to update git pip packages then run:
+
+If the GMT dependency is a git checkout (which is the default), then you may need to run the following command to update
+the GMT dependency:
 
 .. code-block:: bash
 
@@ -54,3 +65,8 @@ Todos
 -----
 
 * handle weather!
+
+
+.. _GeoJSON to Modelica Translator: https://github.com/urbanopt/geojson-modelica-translator
+.. _Modelica Buildings Library: https://github.com/lbl-srg/modelica-buildings
+.. _GMT readme: https://github.com/urbanopt/geojson-modelica-translator#getting-started
