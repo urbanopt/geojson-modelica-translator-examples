@@ -43,29 +43,30 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 
 class SpawnTwoBuildingTest(TestCase):
     def setUp(self):
+        self.project_name = "spawn_geojson"
         self.data_dir = Path(__file__).parent.parent / "examples" / "spawn_two_buildings"
         self.output_dir = Path(__file__).parent.parent / "output"
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=False)
 
-    def test_to_modelica_defaults(self):
-        project_name = "spawn_geojson"
-        results_path = self.output_dir / project_name
-        if results_path.exists():
-            shutil.rmtree(results_path)
+        self.results_path = self.output_dir / self.project_name
+        if self.results_path.exists():
+            shutil.rmtree(self.results_path)
 
-        feature_json_file = self.data_dir / f"{project_name}.json"
+    def test_to_modelica_defaults(self):
+        feature_json_file = self.data_dir / f"{self.project_name}.json"
+
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
         sys_params_json_file = self.data_dir / 'spawn_system_params.json'
         gj.set_system_parameters(SystemParameters(sys_params_json_file))
         gj.process_loads()
-        self.assertEqual(len(gj.loads), 2)
 
-        gj.to_modelica(project_name, self.output_dir)
-        self.assertTrue(results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_Chicago.idf")  # noqa
+        self.assertEqual(len(gj.loads), 2)
+        gj.to_modelica(self.project_name, self.output_dir)
+
+        self.assertTrue(self.results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_Chicago.idf")  # noqa
 
         mr = ModelicaRunner()
-
         file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
         run_path = Path(gj.scaffold.project_path).parent
 
