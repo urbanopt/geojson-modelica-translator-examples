@@ -57,7 +57,7 @@ class SpawnTwoBuildingTest(TestCase):
         feature_json_file = self.data_dir / f"{self.project_name}.json"
 
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
-        sys_params_json_file = self.data_dir / 'spawn_system_params.json'
+        sys_params_json_file = self.data_dir / 'spawn_system_param.json'
         gj.set_system_parameters(SystemParameters(sys_params_json_file))
         gj.process_loads()
 
