@@ -1,6 +1,6 @@
 """
 ****************************************************************************************************
-:copyright (c) 2019-2020 URBANopt, Alliance for Sustainable Energy, LLC, and other contributors.
+:copyright (c) 2019-2021 URBANopt, Alliance for Sustainable Energy, LLC, and other contributors.
 
 All rights reserved.
 
@@ -28,14 +28,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ****************************************************************************************************
 """
 
-import itertools
 import os
 import shutil
 import unittest
 from pathlib import Path
 
+# from buildingspy.io.outputfile import Reader
 from geojson_modelica_translator.geojson_modelica_translator import (
     GeoJsonModelicaTranslator
+)
+from geojson_modelica_translator.model_connectors.couplings import (
+    Coupling,
+    CouplingGraph
+)
+from geojson_modelica_translator.model_connectors.districts import District
+from geojson_modelica_translator.model_connectors.energy_transfer_systems.ets_cold_water_stub import (
+    EtsColdWaterStub
+)
+from geojson_modelica_translator.model_connectors.energy_transfer_systems.ets_hot_water_stub import (
+    EtsHotWaterStub
+)
+from geojson_modelica_translator.model_connectors.load_connectors.teaser import (
+    Teaser
 )
 from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 from geojson_modelica_translator.system_parameters.system_parameters import (
@@ -60,62 +74,86 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
 
         gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
         sys_params_json_file = self.data_dir / 'geojson_8_system_params.json'
-        gj.set_system_parameters(SystemParameters(sys_params_json_file))
+        sys_params = SystemParameters(sys_params_json_file)
+        gj.set_system_parameters(sys_params)
         gj.process_loads()
 
         self.assertEqual(len(gj.loads), 8)
 
-        gj.to_modelica(self.project_name, self.output_dir)
+        all_couplings = []
 
-        # setup what we are going to check
-        model_names = [
-            "Floor",
-            "ICT",
-            "Meeting",
-            "Office",
-            "package",
-            "Restroom",
-            "Storage",
-        ]
+        for geojson_load in gj.json_loads:
+            teaser_load = Teaser(sys_params, geojson_load)
 
-        building_paths = [
-            os.path.join(gj.scaffold.loads_path.files_dir, b.dirname) for b in gj.json_loads
-        ]
-        print(building_paths)
+            hot_stub = EtsHotWaterStub(sys_params)
+            cold_stub = EtsColdWaterStub(sys_params)
+            all_couplings.append(Coupling(teaser_load, hot_stub))
+            all_couplings.append(Coupling(teaser_load, cold_stub))
 
-        path_checks = [f"{os.path.sep.join(r)}.mo" for r in itertools.product(building_paths, model_names)]
+        graph = CouplingGraph(all_couplings)
 
-        for p in path_checks:
-            self.assertTrue(os.path.exists(p), f"Path not found: {p}")
+        district = District(
+            root_dir=self.output_dir,
+            project_name=self.project_name,
+            system_parameters=sys_params,
+            coupling_graph=graph
+        )
 
-        # go through the generated buildings and ensure that the resources are created
-        resource_names = [
-            "InternalGains_Floor",
-            "InternalGains_ICT",
-            "InternalGains_Meeting",
-            "InternalGains_Office",
-            "InternalGains_Restroom",
-            "InternalGains_Storage",
-        ]
-
-        for b in gj.json_loads:
-            for resource_name in resource_names:
-                # TEASER 0.7.2 used .txt for schedule files
-                path = os.path.join(gj.scaffold.loads_path.files_dir, "Resources", "Data",
-                                    b.dirname, f"{resource_name}.txt")
-                self.assertTrue(os.path.exists(path), f"Path not found: {path}")
+        district.to_modelica()
 
         # run a single file to make sure it simulates
         mr = ModelicaRunner()
 
-        file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B2' / 'coupling.mo'
-        run_path = Path(gj.scaffold.project_path).parent
-
-        exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=gj.scaffold.project_name)
+        root_path = os.path.abspath(os.path.join(district._scaffold.districts_path.files_dir))
+        exitcode = mr.run_in_docker(os.path.join(root_path, 'DistrictEnergySystem.mo'),
+                                    run_path=Path(district._scaffold.project_path).resolve().parent,
+                                    project_name=district._scaffold.project_name)
         self.assertEqual(0, exitcode)
 
-        results_path = Path(run_path / f"{gj.scaffold.project_name}_results")
-        self.assertTrue(Path(results_path) / 'stdout.log')
-        self.assertTrue(
-            Path(results_path) / 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_SpawnCouplingETS.fmu'
-        )
+    # def test_teaser_district(self):
+    #     """Create full network with 8 buildings -- need to add Teaser_Indirect to GMT to make this work
+    #     """
+    #     feature_json_file = self.data_dir / f"{self.project_name}.json"
+    #
+    #     gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
+    #     sys_params_json_file = self.data_dir / 'geojson_8_system_params.json'
+    #     sys_params = SystemParameters(sys_params_json_file)
+    #     gj.set_system_parameters(sys_params)  # not needed right now
+    #
+    #     # create cooling network and plant
+    #     cooling_network = Network2Pipe(sys_params)
+    #     cooling_plant = CoolingPlant(sys_params)
+    #
+    #     # create heating network and plant
+    #     heating_network = Network2Pipe(sys_params)
+    #     heating_plant = HeatingPlant(sys_params)
+    #
+    #     # create our load/ets/stubs
+    #     # store all couplings to construct the District system
+    #     all_couplings = [
+    #         Coupling(cooling_network, cooling_plant),
+    #         Coupling(heating_network, heating_plant),
+    #     ]
+    #
+    #     for geojson_load in gj.json_loads:
+    #         time_series_load = Teaser(sys_params, geojson_load)
+    #         geojson_load_id = geojson_load.feature.properties["id"]
+    #
+    #         cooling_indirect = CoolingIndirect(sys_params, geojson_load_id)
+    #         all_couplings.append(Coupling(time_series_load, cooling_indirect))
+    #         all_couplings.append(Coupling(cooling_indirect, cooling_network))
+    #
+    #         heating_indirect = HeatingIndirect(sys_params, geojson_load_id)
+    #         all_couplings.append(Coupling(time_series_load, heating_indirect))
+    #         all_couplings.append(Coupling(heating_indirect, heating_network))
+    #
+    #     # create the couplings and graph
+    #     graph = CouplingGraph(all_couplings)
+    #
+    #     district = District(
+    #         root_dir=self.output_dir,
+    #         project_name=self.project_name,
+    #         system_parameters=self.sys_params,
+    #         coupling_graph=graph
+    #     )
+    #     district.to_modelica()

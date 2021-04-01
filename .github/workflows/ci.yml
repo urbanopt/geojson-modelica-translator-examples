@@ -30,17 +30,17 @@ jobs:
           MODELICAPATH: /home/runner/work/modelica-buildings
         run: |
           git clone --single-branch --branch issue2204_gmt_mbl https://github.com/lbl-srg/modelica-buildings.git $MODELICAPATH
-          cd $MODELICAPATH
-          echo "Git branch is $(git branch)"
+          # back in the main checkout install Python dependencies
           pip install --upgrade pip
-          pip install tox==3.13.2
+          pip install poetry
+          poetry install
       -
-        name: Run unittests (using tox)
+        name: Run unittests
         env:
           MODELICAPATH: /home/runner/work/modelica-buildings
         run: |
-          echo $(pwd)
-          tox -e python
+
+          poetry run py.test . -v --cov coveralls --cov-report term-missing
       -
         name: Job Failed
         if: ${{ failure() }}
@@ -73,10 +73,9 @@ jobs:
         name: Install deps
         run: |
           pip install --upgrade pip
-          pip install tox==3.13.2
-          pip install requests
+          pip install poetry
+          poetry install
       -
         name: Run pre-commit
         run: |
-          pip install pre-commit
-          pre-commit run --show-diff-on-failure --color=always --all-files
+          poetry run pre-commit run --show-diff-on-failure --color=always --all-files
