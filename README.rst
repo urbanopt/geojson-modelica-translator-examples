@@ -46,9 +46,11 @@ Matrix of Examples
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | ID        | Number of Buildings | Building Loads | ETS Model | Network Model | District Plant                     | Status      |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
-| 4GDHC - 1 | 8                   | TEASER         | Indirect  | 4-Pipe        | Chiller, Cooling Tower, and Boiler | Complete    |
+| 4GDHC - 1 | 8                   | TEASER         | Indirect  | N/A           | Infinite Heating and Cooling       | Complete    |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | 4GDHC - 2 | 2                   | Spawn          | N/A       | N/A           | Infinite Heating and Cooling       | Complete    |
++-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
+| 4GDHC - 3 | 8                   | TEASER         | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | 4GDHC - 4 | 2                   | Spawn          | Indirect  | None          | Infinite Heating and Cooling       | In-progress |
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
@@ -61,7 +63,7 @@ Matrix of Examples
 Todos
 -----
 
-* None (yet)
+* Create TEASER to Indirect HX
 
 .. _GeoJSON to Modelica Translator: https://github.com/urbanopt/geojson-modelica-translator
 .. _Modelica Buildings Library: https://github.com/lbl-srg/modelica-buildings
