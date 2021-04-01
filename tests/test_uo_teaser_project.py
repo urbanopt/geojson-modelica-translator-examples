@@ -80,26 +80,15 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
 
         self.assertEqual(len(gj.loads), 8)
 
-        # build teaser model with hot and cold water stubbed out
-        # teaser = Teaser(sys_params, gj.json_loads[0])
-        # hot_stub = EtsHotWaterStub(sys_params)
-        # cold_stub = EtsColdWaterStub(sys_params)
-
         all_couplings = []
 
         for geojson_load in gj.json_loads:
             teaser_load = Teaser(sys_params, geojson_load)
-            # geojson_load_id = geojson_load.feature.properties["id"]
 
             hot_stub = EtsHotWaterStub(sys_params)
             cold_stub = EtsColdWaterStub(sys_params)
             all_couplings.append(Coupling(teaser_load, hot_stub))
             all_couplings.append(Coupling(teaser_load, cold_stub))
-
-        # all_couplings = [
-        #     Coupling(teaser, hot_stub),
-        #     Coupling(teaser, cold_stub),
-        # ]
 
         graph = CouplingGraph(all_couplings)
 
