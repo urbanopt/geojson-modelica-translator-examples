@@ -36,9 +36,6 @@ from geojson_modelica_translator.geojson_modelica_translator import (
     GeoJsonModelicaTranslator
 )
 from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
-from geojson_modelica_translator.system_parameters.system_parameters import (
-    SystemParameters
-)
 
 
 class SpawnTwoBuildingTest(TestCase):
@@ -55,25 +52,28 @@ class SpawnTwoBuildingTest(TestCase):
 
     def test_to_modelica_defaults(self):
         feature_json_file = self.data_dir / f"{self.project_name}.json"
-
-        gj = GeoJsonModelicaTranslator.from_geojson(feature_json_file)
         sys_params_json_file = self.data_dir / 'spawn_system_params.json'
-        gj.set_system_parameters(SystemParameters(sys_params_json_file))
-        gj.process_loads()
 
-        self.assertEqual(len(gj.loads), 2)
-        gj.to_modelica(self.project_name, self.output_dir)
+        gmt = GeoJsonModelicaTranslator(
+            feature_json_file,
+            sys_params_json_file,
+            self.output_dir,
+            self.project_name,
+        )
+
+        gmt.to_modelica()
 
         self.assertTrue(self.results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_Chicago.idf")  # noqa
 
+        # test running just a Spawn coupling
         mr = ModelicaRunner()
-        file_to_run = Path(gj.scaffold.loads_path.files_dir) / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
-        run_path = Path(gj.scaffold.project_path).parent
+        file_to_run = self.results_path / "Loads" / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
+        run_path = Path(self.results_path).parent
 
-        exitcode = mr.run_in_docker(file_to_run, run_path=run_path, project_name=gj.scaffold.project_name)
-        self.assertEqual(0, exitcode)
+        success, _ = mr.run_in_docker(file_to_run, run_path=run_path, project_name=self.project_name)
+        self.assertTrue(success)
 
-        results_path = Path(run_path / f"{gj.scaffold.project_name}_results")
+        results_path = Path(run_path / f"{self.project_name}_results")
         self.assertTrue(Path(results_path) / 'stdout.log')
         self.assertTrue(
             Path(results_path) / 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_SpawnCouplingETS.fmu'
