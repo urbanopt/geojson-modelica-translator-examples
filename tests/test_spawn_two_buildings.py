@@ -68,12 +68,11 @@ class SpawnTwoBuildingTest(TestCase):
         # test running just a Spawn coupling
         mr = ModelicaRunner()
         file_to_run = self.results_path / "Loads" / 'B5a6b99ec37f4de7f94020090' / 'coupling.mo'
-        run_path = Path(self.results_path).parent
 
-        success, _ = mr.run_in_docker(file_to_run, run_path=run_path, project_name=self.project_name)
+        success, _ = mr.run_in_docker(file_to_run, run_path=self.output_dir, project_name=self.project_name)
         self.assertTrue(success)
 
-        results_path = Path(run_path / f"{self.project_name}_results")
+        results_path = Path(self.output_dir / f"{self.project_name}_results")
         self.assertTrue(Path(results_path) / 'stdout.log')
         self.assertTrue(
             Path(results_path) / 'spawn_single_Loads_B5a6b99ec37f4de7f94020090_SpawnCouplingETS.fmu'
