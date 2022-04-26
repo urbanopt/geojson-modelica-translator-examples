@@ -214,7 +214,7 @@ pyflakes = ">=2.2.0,<2.3.0"
 
 [[package]]
 name = "fonttools"
-version = "4.33.2"
+version = "4.33.3"
 description = "Tools to manipulate font files"
 category = "main"
 optional = false
@@ -257,7 +257,7 @@ description = "Package for converting GeoJSON to Modelica models for Urban Scale
 category = "main"
 optional = false
 python-versions = "^3.7"
-develop = true
+develop = false
 
 [package.dependencies]
 BuildingsPy = "2.1.0"
@@ -271,8 +271,10 @@ requests = "2.25.1"
 teaser = "0.7.5"
 
 [package.source]
-type = "directory"
-url = "../geojson-modelica-translator"
+type = "git"
+url = "https://github.com/urbanopt/geojson-modelica-translator.git"
+reference = "develop"
+resolved_reference = "86c12424ccab07054a5310e81268ac73209da7de"
 
 [[package]]
 name = "gitdb"
@@ -1020,7 +1022,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "94312a217419c3920adbae26182d794122660961c4bbb88832f111eaf2b5ac8b"
+content-hash = "02200ee826d59b38e697d649290a48819c863ab3eabfb13610b4468fe7acf184"
 
 [metadata.files]
 alabaster = [
@@ -1155,8 +1157,8 @@ flake8 = [
     {file = "flake8-3.8.3.tar.gz", hash = "sha256:f04b9fcbac03b0a3e58c0ab3a0ecc462e023a9faf046d57794184028123aa208"},
 ]
 fonttools = [
-    {file = "fonttools-4.33.2-py3-none-any.whl", hash = "sha256:b4da40696829845ea8c1cb33ce51c552179754cbee7ab4e8b96a6bcf421f437a"},
-    {file = "fonttools-4.33.2.zip", hash = "sha256:696fe922a271584c3ec8325ba31d4001a4fd6c4953b22900b767f1cb53ce1044"},
+    {file = "fonttools-4.33.3-py3-none-any.whl", hash = "sha256:f829c579a8678fa939a1d9e9894d01941db869de44390adb49ce67055a06cc2a"},
+    {file = "fonttools-4.33.3.zip", hash = "sha256:c0fdcfa8ceebd7c1b2021240bd46ef77aa8e7408cf10434be55df52384865f8e"},
 ]
 future = [
     {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},
