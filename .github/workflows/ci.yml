@@ -33,11 +33,7 @@ jobs:
           # back in the main checkout install Python dependencies
           pip install --upgrade pip
           pip install poetry
-
-          # call poetry update for now because it takes a long time
-          # on a users computer and why not test the latest dependency
-          # versions
-          rm -f poetry.lock && poetry update
+          poetry install
       -
         name: Run unittests
         env:
