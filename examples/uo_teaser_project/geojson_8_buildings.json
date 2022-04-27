@@ -93,7 +93,7 @@
         "id": "3",
         "name": "Restaurant 10",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 125631,
         "footprint_area": 41877,
         "number_of_stories": 3
@@ -132,7 +132,7 @@
         "id": "4",
         "name": "Restaurant 12",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 31623,
         "footprint_area": 10541,
         "number_of_stories": 3
@@ -171,7 +171,7 @@
         "id": "5",
         "name": "Restaurant 14",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 8804,
         "footprint_area": 8804,
         "number_of_stories": 1
@@ -210,7 +210,7 @@
         "id": "6",
         "name": "Restaurant 15",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 10689,
         "footprint_area": 10689,
         "number_of_stories": 1
@@ -249,7 +249,7 @@
         "id": "11",
         "name": "Restaurant 13",
         "type": "Building",
-        "building_type": "Food service",
+        "building_type": "Office",
         "floor_area": 32511,
         "footprint_area": 10837,
         "number_of_stories": 3
@@ -288,7 +288,7 @@
         "id": "12",
         "name": "Mall 1",
         "type": "Building",
-        "building_type": "Strip shopping mall",
+        "building_type": "Office",
         "floor_area": 374409,
         "footprint_area": 124803,
         "number_of_stories": 3
@@ -327,7 +327,7 @@
         "id": "13",
         "name": "Hotel 1",
         "type": "Building",
-        "building_type": "Nursing",
+        "building_type": "Office",
         "floor_area": 316160,
         "footprint_area": 31616,
         "number_of_stories": 10

@@ -1,8 +1,8 @@
 GeoJSON to Modelica Translator Examples
 ---------------------------------------
 
-.. image:: https://travis-ci.org/urbanopt/geojson-modelica-translator-examples.svg?branch=develop
-    :target: https://travis-ci.org/urbanopt/geojson-modelica-translator-examples
+.. image::  https://github.com/urbanopt/geojson-modelica-translator-examples/actions/workflows/ci.yml/badge.svg?branch=develop
+    :target: https://github.com/urbanopt/geojson-modelica-translator-examples/actions/workflows/ci.yml
 
 Description
 -----------
@@ -14,24 +14,34 @@ and the district plant.
 Getting Started
 ---------------
 
-To run the tests in this repo execute the following in a terminal.
+This project depends on the `GeoJSON to Modelica Translator`_ (GMT) and Poetry. The GMT will be installed when calling
+:code:`poetry install`; however, the `Modelica Buildings Library`_ (MBL) needs to be installed to build and
+run the Modelica-based projects. Follow the instructions in the `GMT documentation`_ on installing and configuring the MBL.
+
+To install the dependencies run the following after checking out repository:
 
 .. code-block:: bash
 
-    pip install requests==2.24.0
-    pip install -r requirements.txt
+    pip install poetry
+    poetry install
+
+
+To run the tests in this project, run the following:
+
+.. code-block:: bash
 
     py.test
 
-Note to update git pip packages then run:
+
+If the GMT dependency is a git checkout (which is not the default), then you may need to run the following command to update. In the case of using Poetry with git checkouts, the user may need to uninstall all Poetry packages and reinstall by calling :code:`poetry install`:
 
 .. code-block:: bash
 
     pip install -U --upgrade-strategy eager -r requirements.txt
 
 
-Matrix of Examples to Create
-----------------------------
+Matrix of Examples
+------------------
 
 +-----------+---------------------+----------------+-----------+---------------+------------------------------------+-------------+
 | ID        | Number of Buildings | Building Loads | ETS Model | Network Model | District Plant                     | Status      |
@@ -53,4 +63,8 @@ Matrix of Examples to Create
 Todos
 -----
 
-* handle weather!
+* Create TEASER to Indirect HX
+
+.. _GeoJSON to Modelica Translator: https://github.com/urbanopt/geojson-modelica-translator
+.. _Modelica Buildings Library: https://github.com/lbl-srg/modelica-buildings
+.. _GMT documentation: https://docs.urbanopt.net/installation/des_installation.html#mbl-installation

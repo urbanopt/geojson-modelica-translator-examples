@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # 3.8, 3.9 do not work at the moment.
+        python-version: [3.7]
+    steps:
+      - uses: actions/checkout@v2
+      -
+        name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      -
+        name: Display system info
+        run: |
+          python -c "import sys; print(sys.version)"
+          docker --version
+          docker-compose --version
+      -
+        name: Install dependencies
+        env:
+          MODELICAPATH: /home/runner/work/modelica-buildings
+        run: |
+          git clone --single-branch --branch issue2204_gmt_mbl https://github.com/lbl-srg/modelica-buildings.git $MODELICAPATH
+          # back in the main checkout install Python dependencies
+          pip install --upgrade pip
+          pip install poetry
+          poetry install
+      -
+        name: Run unittests
+        env:
+          MODELICAPATH: /home/runner/work/modelica-buildings
+        run: |
+
+          poetry run py.test . -v --cov coveralls --cov-report term-missing
+      -
+        name: Job Failed
+        if: ${{ failure() }}
+        run: |
+          echo "Maybe these logs will help?"
+          free -tm
+          ls -alt $GITHUB_WORKSPACE
+          echo "============================================ stdout.log ========================================="
+          find $GITHUB_WORKSPACE -type f -name 'stdout.log' -print | while read filename; do
+            echo "$filename"
+            cat "$filename"
+          done
+      -
+        name: Store test output
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-output
+          path: output
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      -
+        name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install poetry
+          poetry install
+      -
+        name: Run pre-commit
+        run: |
+          poetry run pre-commit run --show-diff-on-failure --color=always --all-files
