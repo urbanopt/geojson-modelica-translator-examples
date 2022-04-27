@@ -12,9 +12,9 @@ documentation = "https://docs.urbanopt.net/geojson-modelica-translator/"
 
 [tool.poetry.dependencies]
 python = "^3.7.1"
-# geojson-modelica-translator = "^0.2.2"
+geojson-modelica-translator = "^0.2.3"
 # geojson-modelica-translator = { path = "../geojson-modelica-translator/", develop = true }
-geojson-modelica-translator = { git = "https://github.com/urbanopt/geojson-modelica-translator.git", branch = "teaser-coupling-fix"}
+#geojson-modelica-translator = { git = "https://github.com/urbanopt/geojson-modelica-translator.git", branch = "teaser-coupling-fix"}
 requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
