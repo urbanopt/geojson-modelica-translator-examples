@@ -37,7 +37,8 @@ from pathlib import Path
 from geojson_modelica_translator.geojson_modelica_translator import (
     GeoJsonModelicaTranslator
 )
-from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
+
+# from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
 
 class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
@@ -65,28 +66,27 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
         )
         gmt.to_modelica()
 
-        mr = ModelicaRunner()
+        # mr = ModelicaRunner()
 
-        # run a single building
-        file_to_run = self.results_path / "Loads" / "B2" / "coupling.mo"
-        success, _ = mr.run_in_docker(
-            file_to_run,
-            run_path=self.output_dir,
-            project_name=self.project_name
-        )
-        self.assertTrue(success)
+        # run a single building - no longer able to run with JModelica.
+        # file_to_run = self.results_path / "Loads" / "B2" / "coupling.mo"
+        # success, _ = mr.run_in_docker(
+        #     file_to_run,
+        #     run_path=self.output_dir,
+        #     project_name=self.project_name
+        # )
+        # self.assertTrue(success)
 
-        results_path = Path(self.output_dir / f"{self.project_name}_results")
-        self.assertTrue(Path(results_path) / 'stdout.log')
-        self.assertTrue(
-            Path(results_path) / 'geojson_8_buildings_Districts_DistrictEnergySystem.fmu'
-        )
-        self.assertTrue(
-            Path(results_path) / 'geojson_8_buildings_Districts_DistrictEnergySystem_result.mat'
-        )
+        # results_path = Path(self.output_dir / f"{self.project_name}_results")
+        # self.assertTrue(Path(results_path) / 'stdout.log')
+        # self.assertTrue(
+        #     Path(results_path) / 'geojson_8_buildings_Districts_DistrictEnergySystem.fmu'
+        # )
+        # self.assertTrue(
+        #     Path(results_path) / 'geojson_8_buildings_Districts_DistrictEnergySystem_result.mat'
+        # )
 
-        # run the entire district
-        # This is disabled for now because it takes a long time to run
+        # run the entire district - no longer able to run with JModelica.
 
         # file_to_run = self.results_path / "Districts" / "DistrictEnergySystem.mo"
         # success, _ = mr.run_in_docker(
