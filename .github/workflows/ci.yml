@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  pull_request:
   push:
 
 jobs:
@@ -9,13 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # 3.8, 3.9 do not work at the moment.
-        python-version: [3.7]
+        python-version: [3.7, 3.9]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       -
         name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       -
@@ -56,7 +54,7 @@ jobs:
       -
         name: Store test output
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-output
           path: output
@@ -64,9 +62,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.7'
       -
