@@ -34,9 +34,8 @@ import unittest
 from pathlib import Path
 
 # from buildingspy.io.outputfile import Reader
-from geojson_modelica_translator.geojson_modelica_translator import (
+from geojson_modelica_translator.geojson_modelica_translator import \
     GeoJsonModelicaTranslator
-)
 
 # from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
