@@ -29,8 +29,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import shutil
-from unittest import TestCase
 from pathlib import Path
+from unittest import TestCase
 
 # from buildingspy.io.outputfile import Reader
 from geojson_modelica_translator.geojson_modelica_translator import (
