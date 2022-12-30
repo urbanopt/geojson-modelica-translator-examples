@@ -36,7 +36,6 @@ jobs:
       -
         name: Run unittests
         env:
-          # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           MODELICAPATH: /home/runner/work/modelica-buildings
         run: |
           poetry run py.test . -v --cov --cov-report term-missing
@@ -48,10 +47,6 @@ jobs:
         # https://github.com/TheKevJames/coveralls-python/issues/252
         run: |
           poetry run coveralls --service=github
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@1.1.3
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Job Failed
         if: ${{ failure() }}
@@ -72,7 +67,7 @@ jobs:
           name: test-output
           path: output
   formatting:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
     steps:
       -
         uses: actions/checkout@v3
