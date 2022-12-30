@@ -34,6 +34,7 @@ multi_line_output = 3
 
 # https://docs.pytest.org/en/7.1.x/reference/customize.html
 [tool.pytest.ini_options]
+minversion = "6.0"
 addopts = "--cov geojson_modelica_translator-examples --cov-report term-missing --verbose -s"
 testpaths = ["tests"]
 
