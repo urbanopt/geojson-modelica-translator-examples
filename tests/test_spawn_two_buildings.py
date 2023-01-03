@@ -64,7 +64,7 @@ class SpawnTwoBuildingTest(TestCase):
 
         gmt.to_modelica()
 
-        self.assertTrue(self.results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_Chicago.idf")  # noqa
+        self.assertTrue(self.results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_v1.4_9.6_5A_USA_IL_CHICAGO-OHARE.idf")  # noqa
 
         # test running just a Spawn coupling - no longer able to run with JModelica.
         # mr = ModelicaRunner()

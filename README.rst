@@ -4,6 +4,10 @@ GeoJSON to Modelica Translator Examples
 .. image::  https://github.com/urbanopt/geojson-modelica-translator-examples/actions/workflows/ci.yml/badge.svg?branch=develop
     :target: https://github.com/urbanopt/geojson-modelica-translator-examples/actions/workflows/ci.yml
 
+.. image:: https://coveralls.io/repos/github/urbanopt/geojson-modelica-translator-examples/badge.svg?branch=develop
+    :target: https://coveralls.io/github/urbanopt/geojson-modelica-translator-examples?branch=develop
+
+
 Description
 -----------
 
