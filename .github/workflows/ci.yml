@@ -27,7 +27,6 @@ jobs:
         name: Install dependencies
         env:
           MODELICAPATH: /home/runner/work/modelica-buildings
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           git clone --single-branch --branch maint_9.1.x https://github.com/lbl-srg/modelica-buildings.git $MODELICAPATH
           # back in the main checkout install Python dependencies
@@ -38,6 +37,7 @@ jobs:
         name: Run unittests
         env:
           MODELICAPATH: /home/runner/work/modelica-buildings
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           poetry run py.test . -v --cov --cov-report term-missing
       -
