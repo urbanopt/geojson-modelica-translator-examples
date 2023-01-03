@@ -28,10 +28,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ****************************************************************************************************
 """
 
-import os
 import shutil
-import unittest
 from pathlib import Path
+from unittest import TestCase
 
 # from buildingspy.io.outputfile import Reader
 from geojson_modelica_translator.geojson_modelica_translator import (
@@ -41,14 +40,13 @@ from geojson_modelica_translator.geojson_modelica_translator import (
 # from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
 
-class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
+class GeoJSONUrbanOptExampleFileTest(TestCase):
     def setUp(self):
         self.project_name = "geojson_8_buildings"
-        self.data_dir = Path(__file__).parent.parent / \
-            "examples" / "uo_teaser_project"
+        self.data_dir = Path(__file__).parent.parent / "examples" / "uo_teaser_project"
         self.output_dir = Path(__file__).parent.parent / "output"
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
+        if not self.output_dir.exists():
+            self.output_dir.mkdir(parents=True, exist_ok=False)
 
         self.results_path = self.output_dir / self.project_name
         if self.results_path.exists():
@@ -65,6 +63,9 @@ class GeoJSONUrbanOptExampleFileTest(unittest.TestCase):
             self.project_name,
         )
         gmt.to_modelica()
+
+        # Assert a building successfully built a model
+        self.assertTrue(self.results_path / "Loads" / "B6" / "building.mo")
 
         # mr = ModelicaRunner()
 

@@ -1,11 +1,16 @@
 {
+  "weather": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
   "buildings": [
     {
       "geojson_id": "2",
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -43,7 +48,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -81,7 +90,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -119,7 +132,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -157,7 +174,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -195,7 +216,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -233,7 +258,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -271,7 +300,11 @@
       "load_model": "rc",
       "load_model_parameters": {
         "rc": {
-          "mos_weather_filename": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+          "order": 4,
+          "has_liquid_heating": true,
+          "has_electric_heating": false,
+          "has_liquid_cooling": true,
+          "has_electric_cooling": false,
           "temp_chw_supply": 7,
           "temp_chw_return": 12,
           "temp_hw_supply": 40,
@@ -308,7 +341,6 @@
   "district_system": {
     "fourth_generation": {
       "central_cooling_plant_parameters": {
-        "weather_filepath": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
         "heat_flow_nominal": 7999,
         "cooling_tower_fan_power_nominal": 4999,
         "mass_chw_flow_nominal": 9.9,
