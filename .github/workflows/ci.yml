@@ -27,6 +27,7 @@ jobs:
         name: Install dependencies
         env:
           MODELICAPATH: /home/runner/work/modelica-buildings
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           git clone --single-branch --branch maint_9.1.x https://github.com/lbl-srg/modelica-buildings.git $MODELICAPATH
           # back in the main checkout install Python dependencies
@@ -42,7 +43,6 @@ jobs:
       -
         name: Coveralls
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ matrix.os == 'ubuntu-20.04' }}
         # https://github.com/TheKevJames/coveralls-python/issues/252
