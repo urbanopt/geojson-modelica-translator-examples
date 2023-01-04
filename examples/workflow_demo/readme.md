@@ -7,7 +7,7 @@
 # Using the URBANopt CLI
 Detailed instructions can be found at http://docs.urbanopt.net \
 Help in the terminal for UO SDK is at `uo -h` \
-Help in the terminal for GMT is at `uo_des -h` \
+Help in the terminal for GMT is at `uo_des -h`
 
 ## Install
 Installation instructions for your platform can be found at https://docs.urbanopt.net/installation/installation.html
