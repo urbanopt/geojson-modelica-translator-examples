@@ -41,6 +41,11 @@ from pathlib import Path
 
 import pytest
 
+
+from geojson_modelica_translator.geojson_modelica_translator import (
+    GeoJsonModelicaTranslator
+)
+
 from geojson_modelica_translator.geojson.urbanopt_geojson import (
     UrbanOptGeoJson
 )
