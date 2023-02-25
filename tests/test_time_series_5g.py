@@ -68,10 +68,11 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
     SystemParameters
 )
 
-from ..base_test_case import TestCaseBase
+#from ..base_test_case import TestCaseBase
+from unittest import TestCase
 
 
-class DistrictSystemTest(TestCaseBase):
+class DistrictSystemTest(TestCase):
     def setUp(self):
         super().setUp()
 
