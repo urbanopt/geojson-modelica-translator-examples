@@ -109,7 +109,19 @@ class DistrictSystemTest(TestCase):
 
         self.district.to_modelica()
 
-    def test_build_district_system(self):
+    #def test_build_district_system(self):
+    def test_to_modelica_defaults(self):
+        #feature_json_file = self.data_dir / f"{self.project_name}.json"
+        #AA--need to make this time_series_ex1.json 
+        sys_params_json_file = self.data_dir / 'time_series_5g_sys_params.json'
+
+        gmt = GeoJsonModelicaTranslator(
+            feature_json_file,
+            sys_params_json_file,
+            self.output_dir,
+            self.project_name,
+        )
+        gmt.to_modelica()
         root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
         assert (root_path / 'DistrictEnergySystem.mo').exists()
 
