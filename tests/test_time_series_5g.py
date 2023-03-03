@@ -41,11 +41,6 @@ from pathlib import Path
 
 import pytest
 
-
-from geojson_modelica_translator.geojson_modelica_translator import (
-    GeoJsonModelicaTranslator
-)
-
 from geojson_modelica_translator.geojson.urbanopt_geojson import (
     UrbanOptGeoJson
 )
@@ -69,16 +64,14 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
 )
 
 from base_test_case import TestCaseBase
-#from unittest import TestCase
 
 
-class DistrictSystemTest(TestCase):
+class DistrictSystemTest(TestCaseBase):
     def setUp(self):
         super().setUp()
 
         project_name = "time_series_5g"
-        #self.data_dir, self.output_dir = self.set_up(os.path.dirname(__file__), project_name)
-        self.data_dir = Path(__file__).parent.parent / "examples" / "time_series_5g"
+        self.data_dir, self.output_dir = self.set_up(os.path.dirname(__file__), project_name)
 
         # load in the example geojson with a single office building
         filename = os.path.join(self.data_dir, "time_series_ex1.json")
@@ -110,25 +103,13 @@ class DistrictSystemTest(TestCase):
 
         self.district.to_modelica()
 
-    #def test_build_district_system(self):
-    def test_to_modelica_defaults(self):
-        #feature_json_file = self.data_dir / f"{self.project_name}.json"
-        #AA--need to make this time_series_ex1.json 
-        sys_params_json_file = self.data_dir / 'time_series_5g_sys_params.json'
-
-        gmt = GeoJsonModelicaTranslator(
-            feature_json_file,
-            sys_params_json_file,
-            self.output_dir,
-            self.project_name,
-        )
-        gmt.to_modelica()
+    def test_build_district_system(self):
         root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
         assert (root_path / 'DistrictEnergySystem.mo').exists()
 
-   # @pytest.mark.simulation
-    # def test_simulate_district_system(self):
-        # root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
-        # self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
-                                      # project_path=self.district._scaffold.project_path,
-                                      # project_name=self.district._scaffold.project_name)
+    @pytest.mark.simulation
+    def test_simulate_district_system(self):
+        root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
+        self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
+                                      project_path=self.district._scaffold.project_path,
+                                      project_name=self.district._scaffold.project_name)
