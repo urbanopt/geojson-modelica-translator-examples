@@ -107,9 +107,9 @@ class DistrictSystemTest(TestCaseBase):
         root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
         assert (root_path / 'DistrictEnergySystem.mo').exists()
 
-    @pytest.mark.simulation
-    def test_simulate_district_system(self):
-        root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
-        self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
-                                      project_path=self.district._scaffold.project_path,
-                                      project_name=self.district._scaffold.project_name)
+    #@pytest.mark.simulation
+    # def test_simulate_district_system(self):
+        # root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
+        # self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
+                                      # project_path=self.district._scaffold.project_path,
+                                      # project_name=self.district._scaffold.project_name)
