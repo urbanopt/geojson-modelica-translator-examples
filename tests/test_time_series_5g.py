@@ -71,7 +71,8 @@ class DistrictSystemTest(TestCaseBase):
         super().setUp()
 
         project_name = "time_series_5g"
-        self.data_dir, self.output_dir = self.set_up(os.path.dirname(__file__), project_name)
+        #self.data_dir, self.output_dir = self.set_up(os.path.dirname(__file__), project_name)
+        self.data_dir = Path(__file__).parent.parent / "examples" / "time_series_5g"
 
         # load in the example geojson with a single office building
         filename = os.path.join(self.data_dir, "time_series_ex1.json")
