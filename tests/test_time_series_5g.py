@@ -37,11 +37,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import os
+import shutil
 from pathlib import Path
 
-import pytest
-import shutil
-
+from base_test_case import TestCaseBase
 from geojson_modelica_translator.geojson.urbanopt_geojson import (
     UrbanOptGeoJson
 )
@@ -64,8 +63,6 @@ from geojson_modelica_translator.system_parameters.system_parameters import (
     SystemParameters
 )
 
-from base_test_case import TestCaseBase
-
 
 class DistrictSystemTest(TestCaseBase):
     def setUp(self):
@@ -73,7 +70,7 @@ class DistrictSystemTest(TestCaseBase):
 
         self.project_name = "time_series_5g"
         self.data_dir = Path(__file__).parent.parent / "examples" / "time_series_5g"
-        self.output_dir = Path(__file__).parent.parent / "output" 
+        self.output_dir = Path(__file__).parent.parent / "output"
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True, exist_ok=False)
 
@@ -115,9 +112,9 @@ class DistrictSystemTest(TestCaseBase):
         root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
         assert (root_path / 'DistrictEnergySystem.mo').exists()
 
-    #@pytest.mark.simulation
+    # @pytest.mark.simulation
     # def test_simulate_district_system(self):
         # root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
         # self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
-                                      # project_path=self.district._scaffold.project_path,
-                                      # project_name=self.district._scaffold.project_name)
+        # project_path=self.district._scaffold.project_path,
+        # project_name=self.district._scaffold.project_name)
