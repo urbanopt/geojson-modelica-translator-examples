@@ -73,6 +73,12 @@ class DistrictSystemTest(TestCaseBase):
         project_name = "time_series_5g"
         self.data_dir = Path(__file__).parent.parent / "examples" / "time_series_5g"
         self.output_dir = Path(__file__).parent.parent / "output" 
+        if not self.output_dir.exists():
+            self.output_dir.mkdir(parents=True, exist_ok=False)
+
+        self.results_path = self.output_dir / self.project_name
+        if self.results_path.exists():
+            shutil.rmtree(self.results_path)
 
         # load in the example geojson with a single office building
         filename = os.path.join(self.data_dir, "time_series_ex1.json")
