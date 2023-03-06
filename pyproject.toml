@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "geojson-modelica-translator-examples"
-version = "0.4.0"
+version = "0.5.0"
 description = "Example projects for GeoJSON to Modelica Translator (URBANopt DES)"
 authors = ["URBANopt DES Team <nicholas.long@nrel.gov>"]
 
@@ -18,15 +18,15 @@ geojson-modelica-translator = "^0.4.0"
 requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
-autopep8 = "1.6.0"
-coveralls = "3.3.1"
-pre-commit = "2.20.0"
-pytest = "7.1.2"
-pytest-cov = "3.0.0"
-sphinx = "5.0.1"
-sphinx_rtd_theme = "1.0.0"
-sphinx-jsonschema = "1.19.1"
-toml = "0.10.2"
+autopep8 = "~2.0"
+coveralls = "~3.3"
+pre-commit = "~2.20"
+pytest = "~7.2"
+pytest-cov = "~4.0"
+sphinx = "~5.0"
+sphinx_rtd_theme = "~1.0.0"
+sphinx-jsonschema = "~1.19"
+toml = "~0.10"
 
 # https://pycqa.github.io/isort/docs/configuration/multi_line_output_modes.html
 [tool.isort]
