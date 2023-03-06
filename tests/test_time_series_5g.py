@@ -103,7 +103,7 @@ class DistrictSystemTest(TestCaseBase):
 
         self.district = District(
             root_dir=self.output_dir,
-            project_name=project_name,
+            project_name=self.project_name,
             system_parameters=sys_params,
             coupling_graph=graph
         )
