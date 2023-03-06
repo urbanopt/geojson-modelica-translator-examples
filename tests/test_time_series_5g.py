@@ -70,7 +70,7 @@ class DistrictSystemTest(TestCaseBase):
     def setUp(self):
         super().setUp()
 
-        project_name = "time_series_5g"
+        self.project_name = "time_series_5g"
         self.data_dir = Path(__file__).parent.parent / "examples" / "time_series_5g"
         self.output_dir = Path(__file__).parent.parent / "output" 
         if not self.output_dir.exists():
