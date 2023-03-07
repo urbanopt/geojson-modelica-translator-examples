@@ -41,27 +41,13 @@ import shutil
 from pathlib import Path
 
 from base_test_case import TestCaseBase
-from geojson_modelica_translator.geojson.urbanopt_geojson import (
-    UrbanOptGeoJson
-)
-from geojson_modelica_translator.model_connectors.couplings.coupling import (
-    Coupling
-)
-from geojson_modelica_translator.model_connectors.couplings.graph import (
-    CouplingGraph
-)
-from geojson_modelica_translator.model_connectors.districts.district import (
-    District
-)
-from geojson_modelica_translator.model_connectors.load_connectors.time_series import (
-    TimeSeries
-)
-from geojson_modelica_translator.model_connectors.networks.network_ambient_water_stub import (
-    NetworkAmbientWaterStub
-)
-from geojson_modelica_translator.system_parameters.system_parameters import (
-    SystemParameters
-)
+from geojson_modelica_translator.geojson.urbanopt_geojson import UrbanOptGeoJson
+from geojson_modelica_translator.model_connectors.couplings.coupling import Coupling
+from geojson_modelica_translator.model_connectors.couplings.graph import CouplingGraph
+from geojson_modelica_translator.model_connectors.districts.district import District
+from geojson_modelica_translator.model_connectors.load_connectors.time_series import TimeSeries
+from geojson_modelica_translator.model_connectors.networks.network_ambient_water_stub import NetworkAmbientWaterStub
+from geojson_modelica_translator.system_parameters.system_parameters import SystemParameters
 
 
 class DistrictSystemTest(TestCaseBase):
@@ -92,29 +78,28 @@ class DistrictSystemTest(TestCaseBase):
 
         # create ambient water stub
         ambient_water_stub = NetworkAmbientWaterStub(sys_params)
-        five_g_coupling = Coupling(time_series_load, ambient_water_stub, district_type='5G')
+        five_g_coupling = Coupling(time_series_load, ambient_water_stub, district_type="5G")
 
-        graph = CouplingGraph([
-            five_g_coupling,
-            # ts_cw_coupling,
-        ])
+        graph = CouplingGraph(
+            [
+                five_g_coupling,
+                # ts_cw_coupling,
+            ]
+        )
 
         self.district = District(
-            root_dir=self.output_dir,
-            project_name=self.project_name,
-            system_parameters=sys_params,
-            coupling_graph=graph
+            root_dir=self.output_dir, project_name=self.project_name, system_parameters=sys_params, coupling_graph=graph
         )
 
         self.district.to_modelica()
 
     def test_build_district_system(self):
         root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
-        assert (root_path / 'DistrictEnergySystem.mo').exists()
+        assert (root_path / "DistrictEnergySystem.mo").exists()
 
     # @pytest.mark.simulation
     # def test_simulate_district_system(self):
-        # root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
-        # self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
-        # project_path=self.district._scaffold.project_path,
-        # project_name=self.district._scaffold.project_name)
+    # root_path = Path(self.district._scaffold.districts_path.files_dir).resolve()
+    # self.run_and_assert_in_docker(Path(root_path) / 'DistrictEnergySystem.mo',
+    # project_path=self.district._scaffold.project_path,
+    # project_name=self.district._scaffold.project_name)

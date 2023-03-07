@@ -6,9 +6,7 @@ from pathlib import Path
 from unittest import TestCase
 
 # from buildingspy.io.outputfile import Reader
-from geojson_modelica_translator.geojson_modelica_translator import (
-    GeoJsonModelicaTranslator
-)
+from geojson_modelica_translator.geojson_modelica_translator import GeoJsonModelicaTranslator
 
 # from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
@@ -27,7 +25,7 @@ class GeoJSONUrbanOptExampleFileTest(TestCase):
 
     def test_to_modelica_defaults(self):
         feature_json_file = self.data_dir / f"{self.project_name}.json"
-        sys_params_json_file = self.data_dir / 'geojson_8_system_params.json'
+        sys_params_json_file = self.data_dir / "geojson_8_system_params.json"
 
         gmt = GeoJsonModelicaTranslator(
             feature_json_file,
@@ -38,7 +36,7 @@ class GeoJSONUrbanOptExampleFileTest(TestCase):
         gmt.to_modelica()
 
         # Assert a building successfully built a model
-        self.assertTrue(self.results_path / "Loads" / "B6" / "building.mo")
+        assert self.results_path / "Loads" / "B6" / "building.mo"
 
         # mr = ModelicaRunner()
 

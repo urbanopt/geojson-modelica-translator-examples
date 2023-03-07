@@ -5,9 +5,7 @@ import shutil
 from pathlib import Path
 from unittest import TestCase
 
-from geojson_modelica_translator.geojson_modelica_translator import (
-    GeoJsonModelicaTranslator
-)
+from geojson_modelica_translator.geojson_modelica_translator import GeoJsonModelicaTranslator
 
 # from geojson_modelica_translator.modelica.modelica_runner import ModelicaRunner
 
@@ -26,7 +24,7 @@ class SpawnTwoBuildingTest(TestCase):
 
     def test_to_modelica_defaults(self):
         feature_json_file = self.data_dir / f"{self.project_name}.json"
-        sys_params_json_file = self.data_dir / 'spawn_system_params.json'
+        sys_params_json_file = self.data_dir / "spawn_system_params.json"
 
         gmt = GeoJsonModelicaTranslator(
             feature_json_file,
@@ -37,7 +35,14 @@ class SpawnTwoBuildingTest(TestCase):
 
         gmt.to_modelica()
 
-        self.assertTrue(self.results_path / "Loads" / "Resources" / "Data" / "B5a6b99ec37f4de7f94020090" / "RefBldgSmallOfficeNew2004_v1.4_9.6_5A_USA_IL_CHICAGO-OHARE.idf")  # noqa
+        assert (
+            self.results_path
+            / "Loads"
+            / "Resources"
+            / "Data"
+            / "B5a6b99ec37f4de7f94020090"
+            / "RefBldgSmallOfficeNew2004_v1.4_9.6_5A_USA_IL_CHICAGO-OHARE.idf"
+        )
 
         # test running just a Spawn coupling - no longer able to run with JModelica.
         # mr = ModelicaRunner()

@@ -57,7 +57,7 @@ class GMTTestCase(TestCase):
 class TestCaseBase(GMTTestCase):
     """Base Test Case Class to handle generic configurations"""
 
-    SHARED_DATA_DIR = Path(__file__).parent / 'data_shared'
+    SHARED_DATA_DIR = Path(__file__).parent / "data_shared"
 
     def set_up(self, root_folder, project_name):
         """
@@ -66,8 +66,8 @@ class TestCaseBase(GMTTestCase):
         :param project_name: Name of the project folder to create.
         :return:
         """
-        data_dir = Path(root_folder) / 'data'
-        output_dir = Path(root_folder) / 'output'
+        data_dir = Path(root_folder) / "data"
+        output_dir = Path(root_folder) / "output"
 
         project_dir = output_dir / project_name
         if project_dir.exists():
@@ -90,10 +90,10 @@ class TestCaseBase(GMTTestCase):
         success, results_path = mr.compile_in_docker(file_to_run, save_path=run_path)
         # on the exit of the docker command it should return a zero exit code, otherwise there was an issue.
         # Look at the stdout.log if this is non-zero.
-        self.assertTrue(success)
+        assert success
 
         # make sure that the results log exist
-        self.assertTrue((Path(results_path) / 'stdout.log').exists())
+        assert (Path(results_path) / "stdout.log").exists()
 
     def run_and_assert_in_docker(self, file_to_run: str, project_path: Path, project_name: str):
         """Run the test in docker.
@@ -110,10 +110,10 @@ class TestCaseBase(GMTTestCase):
         success, results_path = mr.run_in_docker(file_to_run, run_path=run_path, project_name=project_name)
         # on the exit of the docker command it should return a zero exit code, otherwise there was an issue.
         # Look at the stdout.log if this is non-zero.
-        self.assertTrue(success)
+        assert success
 
         # make sure that the results log exist
-        self.assertTrue((Path(results_path) / 'stdout.log').exists())
+        assert (Path(results_path) / "stdout.log").exists()
 
     def cvrmsd(self, measured, simulated):
         """Return CVRMSD between arrays.
@@ -123,16 +123,11 @@ class TestCaseBase(GMTTestCase):
         :param simulated: numpy.array
         :return: float
         """
+
         def rmsd(a, b):
             p = 1
             n_samples = len(a)
-            return np.sqrt(
-                np.sum(
-                    np.square(
-                        a - b
-                    )
-                ) / (n_samples - p)
-            )
+            return np.sqrt(np.sum(np.square(a - b)) / (n_samples - p))
 
         normalization_factor = np.mean(measured)
         return rmsd(measured, simulated) / normalization_factor
