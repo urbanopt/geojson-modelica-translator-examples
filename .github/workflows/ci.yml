@@ -30,11 +30,9 @@ jobs:
         run: |
           git clone --single-branch --branch maint_9.1.x https://github.com/lbl-srg/modelica-buildings.git $MODELICAPATH
           # back in the main checkout install Python dependencies
-          pip install --upgrade pip poetry
+          pip install --upgrade pip
+          pip install poetry
           poetry install
-      - name: Run pre-commit
-        run: |
-          poetry run pre-commit run --all-files
       -
         name: Run unittests
         env:
@@ -70,21 +68,21 @@ jobs:
         with:
           name: test-output
           path: output
-  # formatting:
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-20.04, windows-latest]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-python@v4
-  #       with:
-  #         python-version: '3.7.1'
-  #     - name: Install deps
-  #       run: |
-  #         pip install --upgrade pip
-  #         pip install poetry
-  #         poetry install
-  #     - name: Run pre-commit
-  #       run: |
-  #         poetry run pre-commit run --show-diff-on-failure --color=always --all-files
+  formatting:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.1'
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install poetry
+          poetry install
+      - name: Run pre-commit
+        run: |
+          poetry run pre-commit run --show-diff-on-failure --color=always --all-files
