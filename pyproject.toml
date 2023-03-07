@@ -27,10 +27,22 @@ sphinx = "~5.0"
 sphinx_rtd_theme = "~1.0.0"
 sphinx-jsonschema = "~1.19"
 toml = "~0.10"
+ruff = "~0.0.254"
+black = "~23.1"
 
-# https://pycqa.github.io/isort/docs/configuration/multi_line_output_modes.html
-[tool.isort]
-multi_line_output = 3
+[tool.black]
+line-length = 140 # Ruff and Black must have the same line-length setting to work together
+
+# https://github.com/charliermarsh/ruff
+[tool.ruff]
+fix = true # automatically fix problems if possible
+select = ["RUF", "E", "F", "I", "UP", "N", "S", "BLE", "A", "C4", "T10", "ISC", "ICN", "PT",
+"Q", "SIM", "TID", "ARG", "DTZ", "PD", "PGH", "PLC", "PLE", "PLR", "PLW", "PIE", "COM"] # Enable these rules
+ignore = ["PLR0913", "PLR2004", "PLR0402", "COM812", "COM819", "SIM108", "ARG002"] # except for these specific errors
+line-length = 140
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101"]
 
 # https://docs.pytest.org/en/7.1.x/reference/customize.html
 [tool.pytest.ini_options]
